@@ -253,39 +253,31 @@ const bg        = document.getElementById('bg');
 const bgOverlay = document.getElementById('bg-overlay');
 
 // ── MOUSE PARALLAX ──────────────────────────────────────────────
-// Smooth LERP-based parallax identical to Max Mara's Apollo system.
-// Mouse offset from centre → gentle translate on the background image.
-// Range: ±20px horizontal, ±14px vertical (scaled by viewport).
-const PARALLAX_X  = 20;   // max px shift left/right
-const PARALLAX_Y  = 14;   // max px shift up/down
-const LERP_FACTOR = 0.06; // smoothing (0 = never arrives, 1 = instant) — ~750ms feel
+const PARALLAX_X  = 20;
+const PARALLAX_Y  = 14;
+const LERP_FACTOR = 0.06;
 
-let mouseX = 0, mouseY = 0;   // raw target (normalised –1…1)
-let curX   = 0, curY   = 0;   // current smoothed value
-let animating = false;         // becomes false after click
+let mouseX = 0, mouseY = 0;
+let curX   = 0, curY   = 0;
+let baseScale = 1.06; // increases to 1.18 during zoom
 
 document.addEventListener('pointermove', (e) => {
-  mouseX = (e.clientX / window.innerWidth  * 2 - 1); // –1 … +1
+  mouseX = (e.clientX / window.innerWidth  * 2 - 1);
   mouseY = (e.clientY / window.innerHeight * 2 - 1);
 }, { passive: true });
 
 function parallaxLoop() {
-  if (animating) return; // hand off to zoom animation on click
-
-  // LERP toward target
   curX += (mouseX - curX) * LERP_FACTOR;
   curY += (mouseY - curY) * LERP_FACTOR;
 
   const tx = curX * PARALLAX_X;
   const ty = curY * PARALLAX_Y;
 
-  // Keep base scale slightly >1 so parallax shift never reveals edges
-  bg.style.transform = `scale(1.06) translate(${tx}px, ${ty}px)`;
+  bg.style.transform = `scale(${baseScale}) translate(${tx}px, ${ty}px)`;
 
   requestAnimationFrame(parallaxLoop);
 }
 
-// Start loop once bg is visible (it fades in via CSS opacity)
 requestAnimationFrame(parallaxLoop);
 
 // ── CLICK → ZOOM ────────────────────────────────────────────────
@@ -293,21 +285,35 @@ btn.addEventListener('click', function(e) {
   e.preventDefault();
   const dest = btn.getAttribute('href');
 
-  animating = true;
-
   // Fade out text, button and overlay
   intro.classList.add('hidden');
   btnWrap.classList.add('hidden');
   bgOverlay.classList.add('hidden');
 
-  // Override parallax transform with CSS zoom transition
-  bg.style.transition = 'transform 1.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1)';
-  requestAnimationFrame(() => {
-    bg.style.transform = 'scale(1.18)';
-    bg.style.opacity   = '1';
-  });
+  // Animate baseScale from 1.06 → 1.18 over 1400ms
+  // parallaxLoop keeps running and reads the updated baseScale each frame
+  const startScale = 1.06;
+  const endScale   = 1.18;
+  const duration   = 1400;
+  const startTime  = performance.now();
 
-  setTimeout(() => { window.location.href = dest; }, 1400);
+  function easeInOut(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
+
+  function zoomTick(now) {
+    const elapsed  = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    baseScale = startScale + (endScale - startScale) * easeInOut(progress);
+
+    if (progress < 1) {
+      requestAnimationFrame(zoomTick);
+    } else {
+      window.location.href = dest;
+    }
+  }
+
+  requestAnimationFrame(zoomTick);
 });
 </script>
 
