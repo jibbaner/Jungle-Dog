@@ -51,11 +51,17 @@ html, body {
   overflow: hidden;
   background: #F5F0E0;
 }
+
+/* Parallax image layer — oversized so shifts never expose edges */
 #hero-img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
+  position: absolute;
+  inset: -5%;
+  width: 110%; height: 110%;
+  background-image: url('Bilder/Webseite/Jungle Dog Home.png');
+  background-size: cover;
+  background-position: center top;
+  will-change: transform;
+  transform: scale(1.06);
 }
 
 /* ── HOTSPOTS ── */
@@ -172,7 +178,7 @@ html, body {
 </a>
 
 <section id="hero">
-  <img id="hero-img" src="Bilder/Webseite/Jungle Dog Home.png" alt="Jungle Dog in Bern">
+  <div id="hero-img" role="img" aria-label="Jungle Dog in Bern"></div>
 
   <!-- Anbau -->
   <a class="hotspot" id="hs-anbau" href="anbau.html">
@@ -221,6 +227,30 @@ html, body {
 </section>
 
 <div class="corner-tag">Klick auf eine Szene</div>
+
+<script>
+const heroImg     = document.getElementById('hero-img');
+const PARALLAX_X  = 24;
+const PARALLAX_Y  = 14;
+const LERP_FACTOR = 0.06;
+
+let mouseX = 0, mouseY = 0;
+let curX   = 0, curY   = 0;
+
+document.addEventListener('pointermove', (e) => {
+  mouseX = (e.clientX / window.innerWidth  * 2 - 1);
+  mouseY = (e.clientY / window.innerHeight * 2 - 1);
+}, { passive: true });
+
+function loop() {
+  curX += (mouseX - curX) * LERP_FACTOR;
+  curY += (mouseY - curY) * LERP_FACTOR;
+  heroImg.style.transform = `scale(1.06) translate(${curX * PARALLAX_X}px, ${curY * PARALLAX_Y}px)`;
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+</script>
 
 </body>
 </html>
