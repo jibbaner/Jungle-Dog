@@ -25,36 +25,29 @@ html, body {
   background: var(--beige);
 }
 
-/* ── NAV ── */
-nav {
+/* ── LOGO ── */
+.site-logo {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 32px; left: 50%;
+  transform: translateX(-50%);
   z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 48px;
+  display: block;
+  animation: fadeLogoIn 0.8s ease 0.3s both;
+}
+.site-logo img {
   height: 64px;
-  background: var(--beige);
-  border-bottom: 1.5px solid var(--dark);
+  width: auto;
+  display: block;
 }
-.nav-logo {
-  font-family: var(--font-display);
-  font-size: 28px;
-  letter-spacing: 0.04em;
-  color: var(--dark);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+@keyframes fadeLogoIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-.nav-logo img { height: 36px; width: auto; }
-.nav-logo span { color: var(--red); }
 
 /* ── HERO ── */
 #hero {
   position: fixed;
-  top: 64px; left: 0; right: 0; bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   overflow: hidden;
   background: #F5F0E0;
 }
@@ -162,12 +155,9 @@ nav {
 </head>
 <body>
 
-<nav>
-  <a href="/" class="nav-logo" aria-label="Zurück zur Startseite">
-    <img src="uploads/Jungle Dog Logo.svg" alt="Jungle Dog Logo">
-    JUNGLE D<span>Ø</span>G
-  </a>
-</nav>
+<a href="/" class="site-logo" aria-label="Zurück zur Startseite">
+  <img src="Bilder/Logo/Jungle Dog Logo mit Schrift.svg" alt="Jungle Dog Logo">
+</a>
 
 <section id="hero">
   <img id="hero-img" src="Bilder/Webseite/Jungle Dog Home.png" alt="Jungle Dog in Bern">
