@@ -44,31 +44,20 @@ html, body {
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* ── SCENE WRAPPER — full viewport, beige bg ── */
-#scene {
+/* ── HERO — full viewport, clips the oversized image ── */
+#hero {
   position: fixed;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
   background: var(--beige);
 }
 
-/* ── HERO BOX — 4:3, 90% of viewport ── */
-#hero {
-  position: relative;
-  width:  min(90vw, 90vh * (4/3));
-  height: min(90vh, 90vw * (3/4));
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-/* Parallax image — oversized so JS can shift it edge-to-edge */
+/* Image is 110% of viewport (5% overhang each side).
+   JS translates it ±5% so mouse at edge = image edge visible. */
 #hero-img {
   position: absolute;
-  /* extend beyond box edges; JS shifts within this space */
-  top: -8%; left: -8%;
-  width: 116%; height: 116%;
+  top: -5%; left: -5%;
+  width: 110%; height: 110%;
   background-image: url('Bilder/Webseite/Jungle Dog Home.png');
   background-size: cover;
   background-position: center center;
@@ -189,7 +178,6 @@ html, body {
   <img src="Bilder/Logo/Jungle Dog Logo mit Schrift.svg" alt="Jungle Dog Logo">
 </a>
 
-<div id="scene">
 <section id="hero">
   <div id="hero-img" role="img" aria-label="Jungle Dog in Bern"></div>
 
@@ -238,13 +226,11 @@ html, body {
     <span class="hotspot-label">Shop</span>
   </a>
 </section>
-</div>
 
 <div class="corner-tag">Klick auf eine Szene</div>
 
 <script>
 const heroImg     = document.getElementById('hero-img');
-const hero        = document.getElementById('hero');
 const LERP_FACTOR = 0.06;
 
 let mouseX = 0, mouseY = 0;
@@ -252,22 +238,15 @@ let curX   = 0, curY   = 0;
 let rangeX = 0, rangeY = 0;
 
 function calcRange() {
-  // The img div extends 8% beyond each edge of the box.
-  // rangeX/Y = that overhang in px, so mouse at ±1 shifts exactly to edge.
-  rangeX = hero.offsetWidth  * 0.08;
-  rangeY = hero.offsetHeight * 0.08;
+  rangeX = window.innerWidth  * 0.05;
+  rangeY = window.innerHeight * 0.05;
 }
-
 calcRange();
 window.addEventListener('resize', calcRange);
 
-// Track mouse relative to the hero box centre
 document.addEventListener('pointermove', (e) => {
-  const rect = hero.getBoundingClientRect();
-  const cx = rect.left + rect.width  / 2;
-  const cy = rect.top  + rect.height / 2;
-  mouseX = Math.max(-1, Math.min(1, (e.clientX - cx) / (rect.width  / 2)));
-  mouseY = Math.max(-1, Math.min(1, (e.clientY - cy) / (rect.height / 2)));
+  mouseX = (e.clientX / window.innerWidth  * 2 - 1);
+  mouseY = (e.clientY / window.innerHeight * 2 - 1);
 }, { passive: true });
 
 function loop() {
@@ -276,7 +255,6 @@ function loop() {
   heroImg.style.transform = `translate(${curX * rangeX}px, ${curY * rangeY}px)`;
   requestAnimationFrame(loop);
 }
-
 requestAnimationFrame(loop);
 </script>
 
