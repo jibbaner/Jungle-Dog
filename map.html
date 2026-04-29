@@ -44,7 +44,7 @@ html, body {
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* ── HERO — full viewport, clips the oversized image ── */
+/* ── HERO — clips everything outside viewport ── */
 #hero {
   position: fixed;
   inset: 0;
@@ -52,17 +52,23 @@ html, body {
   background: var(--beige);
 }
 
-/* Image is 110% of viewport (5% overhang each side).
-   JS translates it ±5% so mouse at edge = image edge visible. */
-#hero-img {
+/* Single layer moved by JS — image + icons travel together */
+#parallax-layer {
   position: absolute;
+  /* 10% larger than viewport, centred (5% overhang each side) */
   top: -5%; left: -5%;
   width: 110%; height: 110%;
+  will-change: transform;
+}
+
+#hero-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
   background-image: url('Bilder/Webseite/Jungle Dog Home.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  will-change: transform;
 }
 
 /* ── HOTSPOTS ── */
@@ -145,11 +151,12 @@ html, body {
   box-shadow: none;
 }
 
-/* Hotspot positions — red dot centres from original image */
-#hs-anbau   { top: 11%;  left: 18.5%; }
-#hs-about   { top: 38.7%; left: 41.5%; }
-#hs-gastro  { top: 46.3%; left: 11.2%; }
-#hs-shop    { top: 44.7%; left: 54.7%; }
+/* Positions relative to #parallax-layer (110% of viewport).
+   Original viewport-% divided by 1.1 to map into the layer. */
+#hs-anbau  { top: 10%;   left: 16.8%; }
+#hs-about  { top: 35.2%; left: 37.7%; }
+#hs-gastro { top: 42.1%; left: 10.2%; }
+#hs-shop   { top: 40.6%; left: 49.7%; }
 
 /* ── CORNER TAG ── */
 .corner-tag {
@@ -179,6 +186,7 @@ html, body {
 </a>
 
 <section id="hero">
+  <div id="parallax-layer">
   <div id="hero-img" role="img" aria-label="Jungle Dog in Bern"></div>
 
   <!-- Anbau -->
@@ -225,12 +233,13 @@ html, body {
     </div>
     <span class="hotspot-label">Shop</span>
   </a>
+  </div><!-- /parallax-layer -->
 </section>
 
 <div class="corner-tag">Klick auf eine Szene</div>
 
 <script>
-const heroImg     = document.getElementById('hero-img');
+const layer       = document.getElementById('parallax-layer');
 const LERP_FACTOR = 0.06;
 
 let mouseX = 0, mouseY = 0;
@@ -238,6 +247,7 @@ let curX   = 0, curY   = 0;
 let rangeX = 0, rangeY = 0;
 
 function calcRange() {
+  // Layer is 110% of viewport — 5% overhang each side in px
   rangeX = window.innerWidth  * 0.05;
   rangeY = window.innerHeight * 0.05;
 }
@@ -245,6 +255,7 @@ calcRange();
 window.addEventListener('resize', calcRange);
 
 document.addEventListener('pointermove', (e) => {
+  // Normalise to –1…+1 (centre = 0)
   mouseX = (e.clientX / window.innerWidth  * 2 - 1);
   mouseY = (e.clientY / window.innerHeight * 2 - 1);
 }, { passive: true });
@@ -252,7 +263,8 @@ document.addEventListener('pointermove', (e) => {
 function loop() {
   curX += (mouseX - curX) * LERP_FACTOR;
   curY += (mouseY - curY) * LERP_FACTOR;
-  heroImg.style.transform = `translate(${-curX * rangeX}px, ${-curY * rangeY}px)`;
+  // Negative: mouse right → layer shifts left → right image edge appears
+  layer.style.transform = `translate(${-curX * rangeX}px, ${-curY * rangeY}px)`;
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
