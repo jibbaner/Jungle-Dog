@@ -252,7 +252,7 @@ document.addEventListener('pointermove', (e) => {
 function loop() {
   curX += (mouseX - curX) * LERP_FACTOR;
   curY += (mouseY - curY) * LERP_FACTOR;
-  heroImg.style.transform = `translate(${curX * rangeX}px, ${curY * rangeY}px)`;
+  heroImg.style.transform = `translate(${-curX * rangeX}px, ${-curY * rangeY}px)`;
   requestAnimationFrame(loop);
 }
 requestAnimationFrame(loop);
