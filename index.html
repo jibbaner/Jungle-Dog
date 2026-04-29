@@ -25,24 +25,20 @@ html, body {
   font-family: var(--font);
 }
 
-/* ── BACKGROUND IMAGE (zooms on click) ── */
+/* ── BACKGROUND IMAGE (parallax + zooms on click) ── */
 #bg {
   position: fixed;
-  inset: 0;
+  inset: -5%;          /* oversized so parallax never shows edges */
+  width: 110%;
+  height: 110%;
   background-image: url('uploads/jungle-dog-in-bern.png');
   background-size: cover;
   background-position: center;
-  transform: scale(1);
+  transform: scale(1.06);
   transform-origin: center center;
-  transition: transform 1.4s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity   1.4s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0;
-  will-change: transform, opacity;
+  opacity: 1;          /* always visible — intro layer sits on top */
+  will-change: transform;
   z-index: 0;
-}
-#bg.zooming {
-  transform: scale(1.12);
-  opacity: 1;
 }
 
 /* ── INTRO LAYER ── */
@@ -239,28 +235,66 @@ html, body {
 </div>
 
 <script>
-const btn    = document.getElementById('cta-btn');
-const intro  = document.getElementById('intro');
+const btn     = document.getElementById('cta-btn');
+const intro   = document.getElementById('intro');
 const btnWrap = document.getElementById('btn-wrap');
-const bg     = document.getElementById('bg');
+const bg      = document.getElementById('bg');
 
+// ── MOUSE PARALLAX ──────────────────────────────────────────────
+// Smooth LERP-based parallax identical to Max Mara's Apollo system.
+// Mouse offset from centre → gentle translate on the background image.
+// Range: ±20px horizontal, ±14px vertical (scaled by viewport).
+const PARALLAX_X  = 20;   // max px shift left/right
+const PARALLAX_Y  = 14;   // max px shift up/down
+const LERP_FACTOR = 0.06; // smoothing (0 = never arrives, 1 = instant) — ~750ms feel
+
+let mouseX = 0, mouseY = 0;   // raw target (normalised –1…1)
+let curX   = 0, curY   = 0;   // current smoothed value
+let animating = false;         // becomes false after click
+
+document.addEventListener('pointermove', (e) => {
+  mouseX = (e.clientX / window.innerWidth  * 2 - 1); // –1 … +1
+  mouseY = (e.clientY / window.innerHeight * 2 - 1);
+}, { passive: true });
+
+function parallaxLoop() {
+  if (animating) return; // hand off to zoom animation on click
+
+  // LERP toward target
+  curX += (mouseX - curX) * LERP_FACTOR;
+  curY += (mouseY - curY) * LERP_FACTOR;
+
+  const tx = curX * PARALLAX_X;
+  const ty = curY * PARALLAX_Y;
+
+  // Keep base scale slightly >1 so parallax shift never reveals edges
+  bg.style.transform = `scale(1.06) translate(${tx}px, ${ty}px)`;
+
+  requestAnimationFrame(parallaxLoop);
+}
+
+// Start loop once bg is visible (it fades in via CSS opacity)
+requestAnimationFrame(parallaxLoop);
+
+// ── CLICK → ZOOM ────────────────────────────────────────────────
 btn.addEventListener('click', function(e) {
   e.preventDefault();
   const dest = btn.getAttribute('href');
 
-  // 1. Fade out text + button
+  animating = true;
+
+  // Fade out text + button
   intro.classList.add('hidden');
   btnWrap.classList.add('hidden');
 
-  // 2. Zoom in background image
+  // Override parallax transform with CSS zoom transition
+  bg.style.transition = 'transform 1.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1)';
   requestAnimationFrame(() => {
-    bg.classList.add('zooming');
+    bg.style.transform = 'scale(1.18)';
+    bg.style.opacity   = '1';
   });
 
-  // 3. Navigate after animation
-  setTimeout(() => {
-    window.location.href = dest;
-  }, 1400);
+  setTimeout(() => { window.location.href = dest; }, 1400);
 });
 </script>
 
