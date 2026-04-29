@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JUNGLE DØG — Bern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --beige: #FFFFE5;
+  --red:   #ED3221;
+  --dark:  #261507;
+  --mid:   #7A6A55;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body:    'Outfit', sans-serif;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--beige);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: var(--beige);
+  border-bottom: 1.5px solid var(--dark);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--dark);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo img { height: 36px; width: auto; }
+.nav-logo span { color: var(--red); }
+
+/* ── HERO ── */
+#hero {
+  position: fixed;
+  top: 64px; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  background: #F5F0E0;
+}
+#hero-img {
+  width: 100%; height: 100%;
+  object-fit: fill;
+  display: block;
+}
+
+/* ── HOTSPOTS ── */
+.hotspot {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.hotspot-ring {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--dark);
+  background: var(--beige);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.25s, transform 0.25s;
+  box-shadow: 0 2px 16px rgba(38,21,7,0.22);
+}
+.hotspot-ring svg { width: 22px; height: 22px; }
+.hotspot::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--dark);
+  animation: pulseHot 2.2s ease-out infinite;
+  pointer-events: none;
+}
+.hotspot:nth-child(2)::before { animation-delay: 0.55s; }
+.hotspot:nth-child(3)::before { animation-delay: 1.1s; }
+.hotspot:nth-child(4)::before { animation-delay: 1.65s; }
+@keyframes pulseHot {
+  0%   { opacity: 0.65; transform: translateX(-50%) scale(1); }
+  100% { opacity: 0;    transform: translateX(-50%) scale(2.4); }
+}
+.hotspot:hover .hotspot-ring {
+  background: var(--dark);
+  transform: scale(1.15);
+}
+.hotspot:hover .hotspot-ring svg path,
+.hotspot:hover .hotspot-ring svg rect,
+.hotspot:hover .hotspot-ring svg circle,
+.hotspot:hover .hotspot-ring svg line,
+.hotspot:hover .hotspot-ring svg polyline { stroke: var(--beige) !important; }
+
+.hotspot-label {
+  margin-top: 9px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dark);
+  background: var(--beige);
+  padding: 4px 11px;
+  border: 1.5px solid var(--dark);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(5px);
+  transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none;
+}
+.hotspot:hover .hotspot-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hotspot positions */
+#hs-anbau   { top: 8%;  left: 6%; }
+#hs-about   { top: 30%; left: 45%; }
+#hs-gastro  { top: 58%; left: 5%; }
+#hs-shop    { top: 52%; left: 80%; }
+
+/* ── CORNER TAG ── */
+.corner-tag {
+  position: fixed;
+  bottom: 32px;
+  right: 40px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  color: var(--mid);
+  text-transform: uppercase;
+  pointer-events: none;
+  animation: fadeTag 3s ease 1s both;
+}
+@keyframes fadeTag {
+  0%   { opacity: 0; transform: translateY(6px); }
+  30%  { opacity: 1; transform: translateY(0); }
+  70%  { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo" aria-label="Zurück zur Startseite">
+    <img src="uploads/Jungle Dog Logo.svg" alt="Jungle Dog Logo">
+    JUNGLE D<span>Ø</span>G
+  </a>
+</nav>
+
+<section id="hero">
+  <img id="hero-img" src="uploads/jungle-dog-in-bern.png" alt="Jungle Dog in Bern">
+
+  <!-- Anbau -->
+  <a class="hotspot" id="hs-anbau" href="anbau.html">
+    <div class="hotspot-ring">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2C8 2 5 6 5 10C5 15 12 22 12 22C12 22 19 15 19 10C19 6 16 2 12 2Z" stroke="#261507" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="12" cy="10" r="3" stroke="#261507" stroke-width="1.6"/>
+      </svg>
+    </div>
+    <span class="hotspot-label">Anbau →</span>
+  </a>
+
+  <!-- Über den Jungle Dog -->
+  <a class="hotspot" id="hs-about" href="about.html">
+    <div class="hotspot-ring">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="8" r="3.5" stroke="#261507" stroke-width="1.6"/>
+        <path d="M5 20C5 17 8 15 12 15C16 15 19 17 19 20" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="hotspot-label">Über den Jungle Dog →</span>
+  </a>
+
+  <!-- Partner -->
+  <a class="hotspot" id="hs-gastro" href="partner.html">
+    <div class="hotspot-ring">
+      <svg viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="9" stroke="#261507" stroke-width="1.6"/>
+        <path d="M12 8V12L15 15" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="hotspot-label">Partner →</span>
+  </a>
+
+  <!-- Shop -->
+  <a class="hotspot" id="hs-shop" href="shop.html">
+    <div class="hotspot-ring">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M6 2L3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6L18 2H6Z" stroke="#261507" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="3" y1="6" x2="21" y2="6" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <span class="hotspot-label">Shop →</span>
+  </a>
+</section>
+
+<div class="corner-tag">Klick auf eine Szene</div>
+
+</body>
+</html>
