@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@400;500;600;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-jd-red: #ED3221;
+  --color-jd-green: #1AAA5A;
+  --color-jd-beige: #FFFFE5;
+  --color-jd-dark: #111111;
+
+  --font-modern: "Space Grotesk", sans-serif;
+  --font-berlin: "Berlin Sans FB", "Arial Rounded MT Bold", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  --shadow-brutal: 4px 4px 0px 0px var(--color-jd-dark);
+  --shadow-brutal-lg: 8px 8px 0px 0px var(--color-jd-dark);
+  --shadow-brutal-xl: 12px 12px 0px 0px var(--color-jd-dark);
+}
+
+body {
+  background-color: var(--color-jd-beige);
+  color: var(--color-jd-dark);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* Custom brutalist scrollbar */
+::-webkit-scrollbar {
+  width: 16px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-jd-beige);
+  border-left: 4px solid var(--color-jd-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-jd-red);
+  border-left: 4px solid var(--color-jd-dark);
+  border-bottom: 4px solid var(--color-jd-dark);
+}
