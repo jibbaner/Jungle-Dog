@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anbau — JUNGLE DØG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red:   #ED3221;
+  --green: #1AAA5A;
+  --beige: #FFFFE5;
+  --dark:  #111111;
+  --font:  'Space Grotesk', sans-serif;
+  --shadow:    4px 4px 0px var(--dark);
+  --shadow-lg: 8px 8px 0px var(--dark);
+  --shadow-xl: 12px 12px 0px var(--dark);
+}
+
+body {
+  background: var(--beige);
+  color: var(--dark);
+  font-family: var(--font);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 68px;
+  background: var(--beige); border-bottom: 4px solid var(--dark);
+}
+.nav-logo {
+  font-size: 22px; font-weight: 900; letter-spacing: -0.02em;
+  text-transform: uppercase; color: var(--dark); text-decoration: none;
+  display: flex; align-items: center; gap: 12px;
+}
+.nav-logo img { height: 36px; width: auto; }
+.nav-logo .ø { color: var(--red); }
+.nav-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 900; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--dark); text-decoration: none;
+  padding: 10px 20px; border: 4px solid var(--dark);
+  box-shadow: var(--shadow); transition: transform 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
+  cursor: pointer;
+}
+.nav-back:hover { transform: translate(4px, 4px); box-shadow: none; background: var(--dark); color: var(--beige); }
+.nav-back svg { width: 16px; height: 16px; }
+
+main { padding-top: 68px; }
+.section-inner { max-width: 1300px; margin: 0 auto; padding: 0 48px; }
+
+/* ── HERO ── */
+#hero {
+  background: var(--green);
+  border-bottom: 4px solid var(--dark);
+  padding: 80px 48px 80px;
+  min-height: calc(100vh - 68px);
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+#hero .section-inner { width: 100%; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--beige); border: 4px solid var(--dark);
+  box-shadow: var(--shadow); padding: 8px 20px;
+  font-size: 11px; font-weight: 900; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 40px;
+}
+.hero-tag-dot { width: 10px; height: 10px; background: var(--red); border: 2px solid var(--dark); flex-shrink: 0; }
+
+.farming-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+h1 {
+  font-size: clamp(3rem, 8vw, 8rem); font-weight: 900;
+  line-height: 0.88; text-transform: uppercase; letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+h1 .line-box {
+  display: inline-block; padding: 4px 16px;
+  border: 4px solid var(--dark); box-shadow: var(--shadow-lg);
+  margin-bottom: 8px;
+}
+h1 .line-beige { background: var(--beige); }
+h1 .line-dark { background: var(--dark); color: var(--beige); }
+h1 .line-outline { color: var(--dark); text-shadow: 5px 5px 0 rgba(0,0,0,0.2); }
+
+.farming-text p {
+  color: rgba(255,255,229,0.75) !important;
+  background: rgba(0,0,0,0.15);
+  border: 2px solid rgba(0,0,0,0.1);
+  padding: 16px 20px;
+  font-size: 16px; font-weight: 600; line-height: 1.75; margin-bottom: 16px;
+}
+
+.stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 40px; }
+.stat-box {
+  background: rgba(0,0,0,0.2); border: 4px solid rgba(0,0,0,0.2);
+  padding: 28px 24px;
+}
+.stat-num { font-size: 52px; font-weight: 900; color: var(--beige); line-height: 1; margin-bottom: 6px; letter-spacing: -0.02em; }
+.stat-label { font-size: 10px; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,229,0.55); }
+
+.rooftop-ph {
+  background: rgba(0,0,0,0.15); border: 4px solid rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-xl);
+  aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: rgba(255,255,229,0.35);
+  text-align: center; padding: 24px; line-height: 2;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+
+/* deco */
+.deco-box {
+  position: absolute; bottom: 60px; right: 60px;
+  background: var(--dark); border: 4px solid var(--dark);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+  padding: 20px 28px; text-align: center;
+  display: none;
+}
+@media (min-width: 1200px) { .deco-box { display: block; } }
+.deco-num { font-size: 48px; font-weight: 900; color: var(--beige); line-height: 1; letter-spacing: -0.02em; }
+.deco-label { font-size: 10px; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,229,0.5); margin-top: 4px; }
+
+/* ── PROZESS ── */
+#prozess {
+  padding: 100px 0;
+  border-bottom: 4px solid var(--dark);
+}
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 900; letter-spacing: 0.2em;
+  text-transform: uppercase; margin-bottom: 24px;
+}
+.eyebrow-bar { width: 24px; height: 4px; background: var(--red); }
+
+h2 {
+  font-size: clamp(2.5rem, 5vw, 5.5rem); font-weight: 900;
+  text-transform: uppercase; line-height: 0.88; letter-spacing: -0.02em;
+  margin-bottom: 64px;
+}
+h2 .hl-green {
+  display: inline-block; background: var(--green);
+  border: 4px solid var(--dark); box-shadow: var(--shadow);
+  padding: 2px 12px; margin-top: 8px;
+}
+
+.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 4px solid var(--dark); box-shadow: var(--shadow-xl); }
+.step {
+  padding: 40px 28px;
+  border-right: 4px solid var(--dark);
+  position: relative;
+  background: var(--beige);
+  transition: background 0.2s;
+}
+.step:last-child { border-right: none; }
+.step:hover { background: var(--dark); color: var(--beige); }
+.step:hover .step-text { color: rgba(255,255,229,0.7); }
+.step-num {
+  font-size: 80px; font-weight: 900; line-height: 1;
+  color: var(--dark); opacity: 0.07; position: absolute;
+  top: 16px; right: 16px; letter-spacing: -0.04em;
+  transition: opacity 0.2s;
+}
+.step:hover .step-num { color: var(--beige); opacity: 0.12; }
+.step-icon {
+  width: 48px; height: 48px;
+  background: var(--green); border: 4px solid var(--dark);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 24px; flex-shrink: 0;
+}
+.step-count {
+  font-size: 11px; font-weight: 900; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--red); margin-bottom: 12px;
+}
+.step:hover .step-count { color: var(--red); }
+.step-title { font-size: 18px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; margin-bottom: 12px; }
+.step-text { font-size: 13px; font-weight: 500; color: #555; line-height: 1.65; }
+
+/* ── FACTS ── */
+#facts {
+  background: var(--dark);
+  padding: 100px 0;
+  border-bottom: 4px solid var(--dark);
+}
+.facts-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.fact-card {
+  background: rgba(255,255,229,0.06); border: 4px solid rgba(255,255,229,0.15);
+  padding: 36px 28px;
+  position: relative; overflow: hidden;
+}
+.fact-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 100%; height: 6px;
+}
+.fact-card:nth-child(1)::before { background: var(--red); }
+.fact-card:nth-child(2)::before { background: var(--green); }
+.fact-card:nth-child(3)::before { background: var(--beige); }
+.fact-bignum {
+  font-size: 72px; font-weight: 900; color: var(--beige);
+  line-height: 1; letter-spacing: -0.03em; margin-bottom: 8px;
+}
+.fact-label {
+  font-size: 10px; font-weight: 900; letter-spacing: 0.22em;
+  text-transform: uppercase; color: rgba(255,255,229,0.4); margin-bottom: 16px;
+}
+.fact-text { font-size: 14px; font-weight: 500; color: rgba(255,255,229,0.65); line-height: 1.6; }
+
+/* ── FOOTER ── */
+footer { background: var(--dark); border-top: 4px solid var(--dark); padding: 72px 0 32px; }
+.footer-inner { max-width: 1300px; margin: 0 auto; padding: 0 48px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 64px; }
+.footer-brand { font-size: 36px; font-weight: 900; text-transform: uppercase; color: var(--beige); margin-bottom: 12px; letter-spacing: -0.02em; }
+.footer-brand .ø { color: var(--red); }
+.footer-tagline { font-size: 13px; color: rgba(255,255,229,0.4); line-height: 1.7; font-weight: 500; max-width: 220px; }
+.footer-col h4 { font-size: 10px; font-weight: 900; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,229,0.35); margin-bottom: 16px; border-bottom: 2px solid rgba(255,255,229,0.1); padding-bottom: 10px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { font-size: 14px; font-weight: 600; color: rgba(255,255,229,0.6); text-decoration: none; transition: color 0.15s; }
+.footer-col ul li a:hover { color: var(--beige); }
+.footer-bottom { border-top: 2px solid rgba(255,255,229,0.08); padding-top: 24px; display: flex; justify-content: space-between; }
+.footer-copy { font-size: 12px; color: rgba(255,255,229,0.3); font-weight: 500; }
+
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-left { transform: translateX(-50px); opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-right { transform: translateX(50px); opacity: 0; transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal-left.visible, .reveal-right.visible { transform: translateX(0); opacity: 1; }
+
+@media (max-width: 1100px) {
+  .process-grid { grid-template-columns: 1fr 1fr; }
+  .step:nth-child(2) { border-right: none; }
+  .step:nth-child(3) { border-right: 4px solid var(--dark); border-top: 4px solid var(--dark); }
+  .step:nth-child(4) { border-right: none; border-top: 4px solid var(--dark); }
+}
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  #hero { padding: 60px 24px; }
+  .section-inner { padding: 0 24px; }
+  .farming-layout { grid-template-columns: 1fr; gap: 40px; }
+  .facts-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+  h1 { font-size: clamp(3rem, 12vw, 5rem); }
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
+  .step { border-right: none; border-bottom: 4px solid var(--dark); }
+  .step:last-child { border-bottom: none; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="uploads/Jungle Dog Logo.svg" alt="Jungle Dog Logo">
+    JUNGLE D<span class="ø">Ø</span>G
+  </a>
+  <a href="/" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Zurück
+  </a>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="deco-box">
+      <div class="deco-num">100%</div>
+      <div class="deco-label">Bio-Anbau</div>
+    </div>
+    <div class="section-inner">
+      <div class="farming-layout">
+        <div class="farming-text reveal reveal-left">
+          <div class="hero-tag"><span class="hero-tag-dot"></span> Unser USP</div>
+          <h1>
+            <span class="line-box line-beige">Vom</span><br>
+            <span class="line-box line-dark">Dach</span><br>
+            <span class="line-outline">in die Flasche.</span>
+          </h1>
+          <p>Was andere als Zutat einkaufen, bauen wir selber an. Auf Berner Stadtdächern wachsen unsere Chilis — unter freiem Himmel, ohne Chemie.</p>
+          <p>Urban Farming ist nicht Trend bei uns — es ist der Anfang von allem.</p>
+          <div class="stats-grid">
+            <div class="stat-box reveal" style="transition-delay:0.1s">
+              <div class="stat-num">3+</div>
+              <div class="stat-label">Dachstandorte</div>
+            </div>
+            <div class="stat-box reveal" style="transition-delay:0.2s">
+              <div class="stat-num">100%</div>
+              <div class="stat-label">Bio-Anbau</div>
+            </div>
+            <div class="stat-box reveal" style="transition-delay:0.3s">
+              <div class="stat-num">8</div>
+              <div class="stat-label">Chili-Sorten</div>
+            </div>
+            <div class="stat-box reveal" style="transition-delay:0.4s">
+              <div class="stat-num">Bern</div>
+              <div class="stat-label">Gebaut in der Stadt</div>
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-right">
+          <div class="rooftop-ph">
+            Rooftop-Foto<br>Urban Farming<br>——<br>Chili-Pflanzen<br>auf Stadtdach
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROZESS -->
+  <section id="prozess">
+    <div class="section-inner">
+      <div class="eyebrow"><span class="eyebrow-bar"></span> Vom Dach bis zur Flasche</div>
+      <h2>Der<br><span class="hl-green">Prozess.</span></h2>
+      <div class="process-grid">
+        <div class="step reveal" style="transition-delay:0.05s">
+          <span class="step-num">01</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C8 7 4 9 4 14C4 18.4 7.6 22 12 22C16.4 22 20 18.4 20 14C20 9 16 7 12 2Z" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="step-count">01 — Anbau</div>
+          <div class="step-title">Anbau</div>
+          <div class="step-text">Chili-Setzlinge werden auf Berner Stadtdächern gepflanzt und von Hand gepflegt.</div>
+        </div>
+        <div class="step reveal" style="transition-delay:0.15s">
+          <span class="step-num">02</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 12L11 14L15 10" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 2L14 8H20L15 12L17 18L12 14L7 18L9 12L4 8H10Z" stroke="#111" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="step-count">02 — Ernte</div>
+          <div class="step-title">Ernte</div>
+          <div class="step-text">Zur Reife von Hand geerntet — nur die besten Früchte kommen in die Sauce.</div>
+        </div>
+        <div class="step reveal" style="transition-delay:0.25s">
+          <span class="step-num">03</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 3H15L17 7L12 9L7 7Z" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 7L5 19H19L17 7" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="step-count">03 — Produktion</div>
+          <div class="step-title">Produktion</div>
+          <div class="step-text">Kleine Chargen, in der eigenen Küche verarbeitet. Ohne Konservierungsstoffe.</div>
+        </div>
+        <div class="step reveal" style="transition-delay:0.35s">
+          <span class="step-num">04</span>
+          <div class="step-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M9 3H15V6L17 8V20H7V8L9 6V3Z" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="12" x2="17" y2="12" stroke="#111" stroke-width="1.5"/></svg>
+          </div>
+          <div class="step-count">04 — Abfüllung</div>
+          <div class="step-title">Abfüllung</div>
+          <div class="step-text">Jede Flasche wird einzeln abgefüllt und etikettiert — bereit für deinen Tisch.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACTS -->
+  <section id="facts">
+    <div class="section-inner">
+      <div class="eyebrow" style="color: rgba(255,255,229,0.5);">
+        <span class="eyebrow-bar" style="background: var(--red);"></span>
+        In Zahlen
+      </div>
+      <h2 style="color: var(--beige); margin-bottom: 48px;">Zahlen &amp;<br><span style="display:inline-block; background: var(--red); border: 4px solid var(--dark); box-shadow: var(--shadow); padding: 2px 12px; margin-top: 8px; color: var(--beige);">Fakten.</span></h2>
+      <div class="facts-grid">
+        <div class="fact-card reveal">
+          <div class="fact-bignum">3+</div>
+          <div class="fact-label">Dachstandorte in Bern</div>
+          <div class="fact-text">Wir bewirtschaften mehrere Stadtdächer im Berner Raum — die Basis für alles, was in die Flasche kommt.</div>
+        </div>
+        <div class="fact-card reveal" style="transition-delay: 0.1s">
+          <div class="fact-bignum">8</div>
+          <div class="fact-label">Chili-Sorten im Anbau</div>
+          <div class="fact-text">Von mild bis brutal: verschiedene Chilisorten ermöglichen die einzigartige Geschmackspalette unserer Saucen.</div>
+        </div>
+        <div class="fact-card reveal" style="transition-delay: 0.2s">
+          <div class="fact-bignum">100%</div>
+          <div class="fact-label">Bio & ohne Chemie</div>
+          <div class="fact-text">Kein Pestizid, kein Kunstdünger. Nur Sonne, Wasser und die Stadtluft von Bern.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">JUNGLE D<span class="ø">Ø</span>G</div>
+        <p class="footer-tagline">Handgemachte Chilisaucen aus Bern. Vom Stadtdach in die Flasche.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Produkte</h4>
+        <ul><li><a href="shop.html">Jungle Red</a></li><li><a href="shop.html">Jungle Green</a></li><li><a href="shop.html">Jungle White</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Entdecken</h4>
+        <ul><li><a href="anbau.html">Anbau</a></li><li><a href="about.html">Über uns</a></li><li><a href="partner.html">Partner</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <ul><li><a href="mailto:info@jungledog.ch">info@jungledog.ch</a></li><li><a href="#">Instagram</a></li><li><a href="#">Impressum</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Jungle Døg, Bern.</span>
+      <span class="footer-copy">Handgemacht mit Schärfe.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
