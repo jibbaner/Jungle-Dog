@@ -28,7 +28,7 @@ html, body {
 /* ── BACKGROUND IMAGE (parallax + zooms on click) ── */
 #bg {
   position: fixed;
-  inset: -5%;          /* oversized so parallax never shows edges */
+  inset: -5%;
   width: 110%;
   height: 110%;
   background-image: url('uploads/jungle-dog-in-bern.png');
@@ -36,17 +36,27 @@ html, body {
   background-position: center;
   transform: scale(1.06);
   transform-origin: center center;
-  opacity: 1;          /* always visible — intro layer sits on top */
   will-change: transform;
   z-index: 0;
 }
+
+/* beige overlay so text stays readable */
+#bg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 255, 229, 0.72);
+  transition: opacity 0.6s ease 0.8s;
+  pointer-events: none;
+}
+#bg-overlay.hidden { opacity: 0; }
 
 /* ── INTRO LAYER ── */
 #intro {
   position: fixed;
   inset: 0;
   z-index: 10;
-  background: var(--beige);
+  background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -204,6 +214,7 @@ html, body {
 <body>
 
 <div id="bg"></div>
+<div id="bg-overlay"></div>
 
 <a href="/map" class="intro-logo" aria-label="Jungle Dog Startseite">
   <img src="uploads/Jungle Dog Logo.svg" alt="Jungle Dog Logo">
@@ -235,10 +246,11 @@ html, body {
 </div>
 
 <script>
-const btn     = document.getElementById('cta-btn');
-const intro   = document.getElementById('intro');
-const btnWrap = document.getElementById('btn-wrap');
-const bg      = document.getElementById('bg');
+const btn       = document.getElementById('cta-btn');
+const intro     = document.getElementById('intro');
+const btnWrap   = document.getElementById('btn-wrap');
+const bg        = document.getElementById('bg');
+const bgOverlay = document.getElementById('bg-overlay');
 
 // ── MOUSE PARALLAX ──────────────────────────────────────────────
 // Smooth LERP-based parallax identical to Max Mara's Apollo system.
@@ -283,9 +295,10 @@ btn.addEventListener('click', function(e) {
 
   animating = true;
 
-  // Fade out text + button
+  // Fade out text, button and overlay
   intro.classList.add('hidden');
   btnWrap.classList.add('hidden');
+  bgOverlay.classList.add('hidden');
 
   // Override parallax transform with CSS zoom transition
   bg.style.transition = 'transform 1.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.4s cubic-bezier(0.4, 0, 0.2, 1)';
