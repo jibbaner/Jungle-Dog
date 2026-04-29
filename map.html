@@ -6,7 +6,7 @@
 <title>JUNGLE DØG — Bern</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -105,32 +105,43 @@ html, body {
 .hotspot:hover .hotspot-ring svg polyline { stroke: var(--beige) !important; }
 
 .hotspot-label {
-  margin-top: 9px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  margin-top: 10px;
+  font-family: 'Space Grotesk', 'Outfit', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--dark);
-  background: var(--beige);
-  padding: 4px 11px;
-  border: 1.5px solid var(--dark);
+  color: var(--beige);
+  background: var(--red);
+  padding: 8px 16px;
+  border: 3px solid var(--dark);
+  box-shadow: 4px 4px 0 var(--dark);
   white-space: nowrap;
   opacity: 0;
-  transform: translateY(5px);
-  transition: opacity 0.2s, transform 0.2s;
+  transform: translateY(6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, background 0.15s ease, box-shadow 0.15s ease;
   pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hotspot-label::after {
+  content: '→';
+  font-size: 14px;
+  font-weight: 900;
 }
 .hotspot:hover .hotspot-label {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(4px, 4px);
+  background: #1AAA5A;
+  box-shadow: none;
 }
 
-/* Hotspot positions */
-#hs-anbau   { top: 8%;  left: 6%; }
-#hs-about   { top: 30%; left: 45%; }
-#hs-gastro  { top: 58%; left: 5%; }
-#hs-shop    { top: 52%; left: 80%; }
+/* Hotspot positions — mapped from screenshot annotation */
+#hs-anbau   { top: 7%;  left: 7%; }
+#hs-about   { top: 20%; left: 47%; }
+#hs-gastro  { top: 43%; left: 5%; }
+#hs-shop    { top: 40%; left: 81%; }
 
 /* ── CORNER TAG ── */
 .corner-tag {
@@ -170,7 +181,7 @@ html, body {
         <circle cx="12" cy="10" r="3" stroke="#261507" stroke-width="1.6"/>
       </svg>
     </div>
-    <span class="hotspot-label">Anbau →</span>
+    <span class="hotspot-label">Anbau</span>
   </a>
 
   <!-- Über den Jungle Dog -->
@@ -181,7 +192,7 @@ html, body {
         <path d="M5 20C5 17 8 15 12 15C16 15 19 17 19 20" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
       </svg>
     </div>
-    <span class="hotspot-label">Über den Jungle Dog →</span>
+    <span class="hotspot-label">Über uns</span>
   </a>
 
   <!-- Partner -->
@@ -192,7 +203,7 @@ html, body {
         <path d="M12 8V12L15 15" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
       </svg>
     </div>
-    <span class="hotspot-label">Partner →</span>
+    <span class="hotspot-label">Partner</span>
   </a>
 
   <!-- Shop -->
@@ -204,7 +215,7 @@ html, body {
         <path d="M16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
       </svg>
     </div>
-    <span class="hotspot-label">Shop →</span>
+    <span class="hotspot-label">Shop</span>
   </a>
 </section>
 
