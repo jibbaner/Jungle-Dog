@@ -8,6 +8,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
+@font-face {
+  font-family: 'Berlin Sans FB Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: url('font/berlin-sans-fb-webfont/BRLNSB.woff') format('woff');
+  font-display: swap;
+}
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
@@ -40,7 +48,7 @@ nav {
   text-transform: uppercase; color: var(--dark); text-decoration: none;
   display: flex; align-items: center; gap: 12px;
 }
-.nav-logo img { height: 36px; width: auto; }
+.nav-logo img { height: 36px; width: auto; max-width: 220px; }
 .nav-logo .ø { color: var(--red); }
 .nav-back {
   display: inline-flex; align-items: center; gap: 8px;
@@ -78,7 +86,8 @@ main { padding-top: 68px; }
 .farming-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 
 h1 {
-  font-size: clamp(3rem, 8vw, 8rem); font-weight: 900;
+  font-family: 'Berlin Sans FB Bold', var(--font);
+  font-size: clamp(3rem, 8vw, 8rem); font-weight: 700;
   line-height: 0.88; text-transform: uppercase; letter-spacing: -0.02em;
   margin-bottom: 40px;
 }
@@ -142,7 +151,8 @@ h1 .line-outline { color: var(--dark); text-shadow: 5px 5px 0 rgba(0,0,0,0.2); }
 .eyebrow-bar { width: 24px; height: 4px; background: var(--red); }
 
 h2 {
-  font-size: clamp(2.5rem, 5vw, 5.5rem); font-weight: 900;
+  font-family: 'Berlin Sans FB Bold', var(--font);
+  font-size: clamp(2.5rem, 5vw, 5.5rem); font-weight: 700;
   text-transform: uppercase; line-height: 0.88; letter-spacing: -0.02em;
   margin-bottom: 64px;
 }
@@ -264,8 +274,7 @@ footer { background: var(--dark); border-top: 4px solid var(--dark); padding: 72
 
 <nav>
   <a href="/" class="nav-logo">
-    <img src="uploads/jungle-dog-logo.svg" alt="Jungle Dog Logo">
-    JUNGLE D<span class="ø">Ø</span>G
+    <img src="Bilder/Logo/jungle-dog-logo-mit-schrift.svg" alt="Jungle Dog Logo">
   </a>
   <a href="/map" class="nav-back">
     <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>

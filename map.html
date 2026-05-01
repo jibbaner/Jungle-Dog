@@ -1,289 +1,380 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JUNGLE DØG — Bern</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@900&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JUNGLE DØG — Bern</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@900&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-:root {
-  --beige: #FFFFE5;
-  --red:   #ED3221;
-  --dark:  #261507;
-  --mid:   #7A6A55;
-  --font-display: 'Bebas Neue', sans-serif;
-  --font-body:    'Outfit', sans-serif;
-}
+    :root {
+      --beige: #FFFFE5;
+      --red: #ED3221;
+      --dark: #261507;
+      --mid: #7A6A55;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+    }
 
-html, body {
-  width: 100%; height: 100%;
-  overflow: hidden;
-  background: var(--beige);
-}
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--beige);
+    }
 
-/* ── LOGO ── */
-.site-logo {
-  position: fixed;
-  top: 32px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  display: block;
-  animation: fadeLogoIn 0.8s ease 0.3s both;
-}
-.site-logo img {
-  height: 64px;
-  width: auto;
-  display: block;
-}
-@keyframes fadeLogoIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
+    /* ── LOGO ── */
+    .site-logo {
+      position: fixed;
+      top: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      display: block;
+      animation: fadeLogoIn 0.8s ease 0.3s both;
+    }
 
-/* ── HERO — clips everything outside viewport ── */
-#hero {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
-  background: var(--beige);
-}
+    .site-logo img {
+      height: 64px;
+      width: auto;
+      display: block;
+    }
 
-/* Single layer moved by JS — image + icons travel together.
+    @keyframes fadeLogoIn {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+
+    /* ── HERO — clips everything outside viewport ── */
+    #hero {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background: var(--beige);
+    }
+
+    /* Single layer moved by JS — image + icons travel together.
    Size and offset are set dynamically in JS based on real overhang. */
-#parallax-layer {
-  position: absolute;
-  will-change: transform;
-}
+    #parallax-layer {
+      position: absolute;
+      will-change: transform;
+    }
 
-#hero-img {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  background-image: url('Bilder/Webseite/jungle-dog-home.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
+    #hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('Bilder/Webseite/jungle-dog-home.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
 
-/* ── HOTSPOTS ── */
-.hotspot {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-decoration: none;
-  cursor: pointer;
-}
-.hotspot-ring {
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  border: 2px solid var(--dark);
-  background: var(--beige);
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.25s, transform 0.25s;
-  box-shadow: 0 2px 16px rgba(38,21,7,0.22);
-}
-.hotspot-ring svg { width: 22px; height: 22px; }
-.hotspot::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 52px; height: 52px;
-  border-radius: 50%;
-  border: 2px solid var(--dark);
-  animation: pulseHot 2.2s ease-out infinite;
-  pointer-events: none;
-}
-.hotspot:nth-child(2)::before { animation-delay: 0.55s; }
-.hotspot:nth-child(3)::before { animation-delay: 1.1s; }
-.hotspot:nth-child(4)::before { animation-delay: 1.65s; }
-@keyframes pulseHot {
-  0%   { opacity: 0.65; transform: translateX(-50%) scale(1); }
-  100% { opacity: 0;    transform: translateX(-50%) scale(2.4); }
-}
-.hotspot:hover .hotspot-ring {
-  background: var(--dark);
-  transform: scale(1.15);
-}
-.hotspot:hover .hotspot-ring svg path,
-.hotspot:hover .hotspot-ring svg rect,
-.hotspot:hover .hotspot-ring svg circle,
-.hotspot:hover .hotspot-ring svg line,
-.hotspot:hover .hotspot-ring svg polyline { stroke: var(--beige) !important; }
+    /* ── HOTSPOTS ── */
+    .hotspot {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-.hotspot-label {
-  margin-top: 10px;
-  font-family: 'Space Grotesk', 'Outfit', sans-serif;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--beige);
-  background: var(--red);
-  padding: 8px 16px;
-  border: 3px solid var(--dark);
-  box-shadow: 4px 4px 0 var(--dark);
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.18s ease, transform 0.18s ease, background 0.15s ease, box-shadow 0.15s ease;
-  pointer-events: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.hotspot-label::after {
-  content: '→';
-  font-size: 14px;
-  font-weight: 900;
-}
-.hotspot:hover .hotspot-label {
-  opacity: 1;
-  transform: translate(4px, 4px);
-  background: #1AAA5A;
-  box-shadow: none;
-}
+    .hotspot-ring {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid var(--dark);
+      background: var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s, transform 0.25s;
+      box-shadow: 0 2px 16px rgba(38, 21, 7, 0.22);
+    }
 
-/* Positions as % of original image dimensions (2390×1792) */
-#hs-anbau  { top: 10.4%; left: 19.6%; }
-#hs-about  { top: 38.8%; left: 39.7%; }
-#hs-gastro { top: 47.5%; left: 11.5%; }
-#hs-shop   { top: 44.5%; left: 55.0%; }
+    .hotspot-ring svg {
+      width: 22px;
+      height: 22px;
+    }
 
-/* ── CORNER TAG ── */
-.corner-tag {
-  position: fixed;
-  bottom: 32px;
-  right: 40px;
-  font-family: var(--font-display);
-  font-size: 13px;
-  letter-spacing: 0.18em;
-  color: var(--mid);
-  text-transform: uppercase;
-  pointer-events: none;
-  animation: fadeTag 3s ease 1s both;
-}
-@keyframes fadeTag {
-  0%   { opacity: 0; transform: translateY(6px); }
-  30%  { opacity: 1; transform: translateY(0); }
-  70%  { opacity: 1; }
-  100% { opacity: 0.4; }
-}
-</style>
+    .hotspot::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid var(--dark);
+      animation: pulseHot 2.2s ease-out infinite;
+      pointer-events: none;
+    }
+
+    .hotspot:nth-child(2)::before {
+      animation-delay: 0.55s;
+    }
+
+    .hotspot:nth-child(3)::before {
+      animation-delay: 1.1s;
+    }
+
+    .hotspot:nth-child(4)::before {
+      animation-delay: 1.65s;
+    }
+
+    @keyframes pulseHot {
+      0% {
+        opacity: 0.65;
+        transform: translateX(-50%) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(2.4);
+      }
+    }
+
+    .hotspot:hover .hotspot-ring {
+      background: var(--dark);
+      transform: scale(1.15);
+    }
+
+    .hotspot:hover .hotspot-ring svg path,
+    .hotspot:hover .hotspot-ring svg rect,
+    .hotspot:hover .hotspot-ring svg circle,
+    .hotspot:hover .hotspot-ring svg line,
+    .hotspot:hover .hotspot-ring svg polyline {
+      stroke: var(--beige) !important;
+    }
+
+    .hotspot-label {
+      margin-top: 10px;
+      font-family: 'Space Grotesk', 'Outfit', sans-serif;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--beige);
+      background: var(--red);
+      padding: 8px 16px;
+      border: 3px solid var(--dark);
+      box-shadow: 4px 4px 0 var(--dark);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.18s ease, transform 0.18s ease, background 0.15s ease, box-shadow 0.15s ease;
+      pointer-events: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hotspot-label::after {
+      content: '→';
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .hotspot:hover .hotspot-label {
+      opacity: 1;
+      transform: translate(4px, 4px);
+      background: #1AAA5A;
+      box-shadow: none;
+    }
+
+    /* Positions as % of original image dimensions (2390×1792) */
+    #hs-anbau {
+      top: 13.4%;
+      left: 24.6%;
+    }
+
+    #hs-about {
+      top: 60.8%;
+      left: 62%;
+    }
+
+    #hs-gastro {
+      top: 69%;
+      left: 7%;
+    }
+
+    #hs-shop {
+      top: 70.5%;
+      left: 86%;
+    }
+
+    /* ── CORNER TAG ── */
+    .corner-tag {
+      position: fixed;
+      bottom: 32px;
+      right: 40px;
+      font-family: var(--font-display);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--mid);
+      text-transform: uppercase;
+      pointer-events: none;
+      animation: fadeTag 3s ease 1s both;
+    }
+
+    @keyframes fadeTag {
+      0% {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      30% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      70% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.4;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<a href="/" class="site-logo" aria-label="Zurück zur Startseite">
-  <img src="Bilder/Logo/jungle-dog-logo-mit-schrift.svg" alt="Jungle Dog Logo">
-</a>
-
-<section id="hero">
-  <div id="parallax-layer">
-  <div id="hero-img" role="img" aria-label="Jungle Dog in Bern"></div>
-
-  <!-- Anbau -->
-  <a class="hotspot" id="hs-anbau" href="anbau.html">
-    <div class="hotspot-ring">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M12 2C8 2 5 6 5 10C5 15 12 22 12 22C12 22 19 15 19 10C19 6 16 2 12 2Z" stroke="#261507" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="12" cy="10" r="3" stroke="#261507" stroke-width="1.6"/>
-      </svg>
-    </div>
-    <span class="hotspot-label">Anbau</span>
+  <a href="/" class="site-logo" aria-label="Zurück zur Startseite">
+    <img src="Bilder/Logo/jungle-dog-logo-mit-schrift.svg" alt="Jungle Dog Logo">
   </a>
 
-  <!-- Über den Jungle Dog -->
-  <a class="hotspot" id="hs-about" href="about.html">
-    <div class="hotspot-ring">
-      <svg viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="8" r="3.5" stroke="#261507" stroke-width="1.6"/>
-        <path d="M5 20C5 17 8 15 12 15C16 15 19 17 19 20" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <span class="hotspot-label">Über uns</span>
-  </a>
+  <section id="hero">
+    <div id="parallax-layer">
+      <div id="hero-img" role="img" aria-label="Jungle Dog in Bern"></div>
 
-  <!-- Partner -->
-  <a class="hotspot" id="hs-gastro" href="partner.html">
-    <div class="hotspot-ring">
-      <svg viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="9" stroke="#261507" stroke-width="1.6"/>
-        <path d="M12 8V12L15 15" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <span class="hotspot-label">Partner</span>
-  </a>
+      <!-- Anbau -->
+      <a class="hotspot" id="hs-anbau" href="anbau.html">
+        <div class="hotspot-ring">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C8 2 5 6 5 10C5 15 12 22 12 22C12 22 19 15 19 10C19 6 16 2 12 2Z" stroke="#261507"
+              stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            <circle cx="12" cy="10" r="3" stroke="#261507" stroke-width="1.6" />
+          </svg>
+        </div>
+        <span class="hotspot-label">Anbau</span>
+      </a>
 
-  <!-- Shop -->
-  <a class="hotspot" id="hs-shop" href="shop.html">
-    <div class="hotspot-ring">
-      <svg viewBox="0 0 24 24" fill="none">
-        <path d="M6 2L3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6L18 2H6Z" stroke="#261507" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-        <line x1="3" y1="6" x2="21" y2="6" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
-        <path d="M16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10" stroke="#261507" stroke-width="1.6" stroke-linecap="round"/>
-      </svg>
-    </div>
-    <span class="hotspot-label">Shop</span>
-  </a>
-  </div><!-- /parallax-layer -->
-</section>
+      <!-- Über den Jungle Dog -->
+      <a class="hotspot" id="hs-about" href="about.html">
+        <div class="hotspot-ring">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8" r="3.5" stroke="#261507" stroke-width="1.6" />
+            <path d="M5 20C5 17 8 15 12 15C16 15 19 17 19 20" stroke="#261507" stroke-width="1.6"
+              stroke-linecap="round" />
+          </svg>
+        </div>
+        <span class="hotspot-label">Über uns</span>
+      </a>
 
-<div class="corner-tag">Klick auf eine Szene</div>
+      <!-- Partner -->
+      <a class="hotspot" id="hs-gastro" href="partner.html">
+        <div class="hotspot-ring">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="9" stroke="#261507" stroke-width="1.6" />
+            <path d="M12 8V12L15 15" stroke="#261507" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </div>
+        <span class="hotspot-label">Partner</span>
+      </a>
 
-<script>
-const layer       = document.getElementById('parallax-layer');
-const LERP_FACTOR = 0.06;
-const IMG_W       = 2390;
-const IMG_H       = 1792;
+      <!-- Shop -->
+      <a class="hotspot" id="hs-shop" href="shop.html">
+        <div class="hotspot-ring">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6L18 2H6Z" stroke="#261507"
+              stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+            <line x1="3" y1="6" x2="21" y2="6" stroke="#261507" stroke-width="1.6" stroke-linecap="round" />
+            <path d="M16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10" stroke="#261507" stroke-width="1.6"
+              stroke-linecap="round" />
+          </svg>
+        </div>
+        <span class="hotspot-label">Shop</span>
+      </a>
+    </div><!-- /parallax-layer -->
+  </section>
 
-let mouseX = 0, mouseY = 0;
-let curX   = 0, curY   = 0;
-let rangeX = 0, rangeY = 0;
+  <div class="corner-tag">Klick auf eine Szene</div>
 
-function setup() {
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
+  <script>
+    const layer = document.getElementById('parallax-layer');
+    const LERP_FACTOR = 0.06;
+    const IMG_W = 2390;
+    const IMG_H = 1792;
 
-  // Rendered size of image when scaled to fill viewport width
-  // (image is wider than 16:9 so it always overflows vertically on wide screens)
-  const scaleByW = vw / IMG_W;
-  const scaleByH = vh / IMG_H;
-  const scale    = Math.max(scaleByW, scaleByH); // cover behaviour
+    let mouseX = 0, mouseY = 0;
+    let curX = 0, curY = 0;
+    let rangeX = 0, rangeY = 0;
 
-  const rendW = IMG_W * scale;
-  const rendH = IMG_H * scale;
+    function setup() {
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
 
-  // Overhang on each side
-  rangeX = (rendW - vw) / 2;
-  rangeY = (rendH - vh) / 2;
+      // Rendered size of image when scaled to fill viewport width
+      // (image is wider than 16:9 so it always overflows vertically on wide screens)
+      const scaleByW = vw / IMG_W;
+      const scaleByH = vh / IMG_H;
+      const scale = Math.max(scaleByW, scaleByH); // cover behaviour
 
-  // Size and centre the layer exactly like cover would
-  layer.style.width  = rendW + 'px';
-  layer.style.height = rendH + 'px';
-  layer.style.left   = -rangeX + 'px';
-  layer.style.top    = -rangeY + 'px';
-}
+      const rendW = IMG_W * scale;
+      const rendH = IMG_H * scale;
 
-setup();
-window.addEventListener('resize', setup);
+      // Overhang on each side
+      rangeX = (rendW - vw) / 2;
+      rangeY = (rendH - vh) / 2;
 
-document.addEventListener('pointermove', (e) => {
-  mouseX = (e.clientX / window.innerWidth  * 2 - 1);
-  mouseY = (e.clientY / window.innerHeight * 2 - 1);
-}, { passive: true });
+      // Size and centre the layer exactly like cover would
+      layer.style.width = rendW + 'px';
+      layer.style.height = rendH + 'px';
+      layer.style.left = -rangeX + 'px';
+      layer.style.top = -rangeY + 'px';
+    }
 
-function loop() {
-  curX += (mouseX - curX) * LERP_FACTOR;
-  curY += (mouseY - curY) * LERP_FACTOR;
-  layer.style.transform = `translate(${-curX * rangeX}px, ${-curY * rangeY}px)`;
-  requestAnimationFrame(loop);
-}
-requestAnimationFrame(loop);
-</script>
+    setup();
+    window.addEventListener('resize', setup);
+
+    document.addEventListener('pointermove', (e) => {
+      mouseX = (e.clientX / window.innerWidth * 2 - 1);
+      mouseY = (e.clientY / window.innerHeight * 2 - 1);
+    }, { passive: true });
+
+    function loop() {
+      curX += (mouseX - curX) * LERP_FACTOR;
+      curY += (mouseY - curY) * LERP_FACTOR;
+      layer.style.transform = `translate(${-curX * rangeX}px, ${-curY * rangeY}px)`;
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  </script>
 
 </body>
+
 </html>

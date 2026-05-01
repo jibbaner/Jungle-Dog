@@ -1,490 +1,991 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop — JUNGLE DØG</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — JUNGLE DØG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'Berlin Sans FB Bold';
+      font-style: normal;
+      font-weight: 700;
+      src: url('font/berlin-sans-fb-webfont/BRLNSB.woff') format('woff');
+      font-display: swap;
+    }
 
-:root {
-  --red:   #ED3221;
-  --green: #1AAA5A;
-  --beige: #FFFFE5;
-  --dark:  #111111;
-  --font:  'Space Grotesk', sans-serif;
-  --shadow:    4px 4px 0px var(--dark);
-  --shadow-lg: 8px 8px 0px var(--dark);
-  --shadow-xl: 12px 12px 0px var(--dark);
-}
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  background: var(--beige);
-  color: var(--dark);
-  font-family: var(--font);
-  overflow-x: hidden;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 0 48px; height: 68px;
-  background: var(--beige); border-bottom: 4px solid var(--dark);
-}
-.nav-logo {
-  font-size: 22px; font-weight: 900; letter-spacing: -0.02em;
-  text-transform: uppercase; color: var(--dark); text-decoration: none;
-  display: flex; align-items: center; gap: 12px;
-}
-.nav-logo img { height: 36px; width: auto; }
-.nav-logo .ø { color: var(--red); }
-.nav-back {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 12px; font-weight: 900; letter-spacing: 0.18em;
-  text-transform: uppercase; color: var(--dark); text-decoration: none;
-  padding: 10px 20px; border: 4px solid var(--dark);
-  box-shadow: var(--shadow); transition: transform 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
-  cursor: pointer;
-}
-.nav-back:hover { transform: translate(4px, 4px); box-shadow: none; background: var(--dark); color: var(--beige); }
-.nav-back svg { width: 16px; height: 16px; }
+    :root {
+      --red: #ED3221;
+      --green: #1AAA5A;
+      --beige: #FFFFE5;
+      --dark: #111111;
+      --font: 'Space Grotesk', sans-serif;
+      --shadow: 4px 4px 0px var(--dark);
+      --shadow-lg: 8px 8px 0px var(--dark);
+      --shadow-xl: 12px 12px 0px var(--dark);
+    }
 
-main { padding-top: 68px; }
-.section-inner { max-width: 1300px; margin: 0 auto; padding: 0 48px; }
+    body {
+      background: var(--beige);
+      color: var(--dark);
+      font-family: var(--font);
+      overflow-x: hidden;
+    }
 
-/* ── HERO ── */
-#hero {
-  background: var(--beige);
-  border-bottom: 4px solid var(--dark);
-  padding: 80px 48px 80px;
-  background-image: radial-gradient(circle, var(--dark) 2px, transparent 3px);
-  background-size: 32px 32px;
-}
-.hero-box {
-  background: var(--beige); border: 4px solid var(--dark);
-  box-shadow: var(--shadow-xl); padding: 48px 56px;
-  display: flex; flex-direction: column; gap: 32px;
-  max-width: 900px;
-}
-.hero-tag {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--dark); color: var(--beige);
-  border: 4px solid var(--dark);
-  padding: 8px 20px; font-size: 11px; font-weight: 900;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  width: fit-content;
-}
-h1 {
-  font-size: clamp(3rem, 8vw, 8rem); font-weight: 900;
-  line-height: 0.88; text-transform: uppercase; letter-spacing: -0.02em;
-}
-h1 .line-red { color: var(--red); text-decoration: underline; text-decoration-thickness: 6px; text-underline-offset: 8px; }
-.hero-sub {
-  background: var(--dark); color: var(--beige);
-  border: 4px solid var(--dark); padding: 16px 24px;
-  font-size: 15px; font-weight: 700; line-height: 1.5;
-  max-width: 560px;
-}
-.btn {
-  display: inline-flex; align-items: center; gap: 12px;
-  font-size: 13px; font-weight: 900; letter-spacing: 0.15em;
-  text-transform: uppercase; text-decoration: none;
-  padding: 18px 36px; border: 4px solid var(--dark);
-  box-shadow: var(--shadow); cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
-  width: fit-content;
-}
-.btn:hover { transform: translate(4px, 4px); box-shadow: none; }
-.btn-red { background: var(--red); color: var(--beige); }
-.btn-red:hover { background: var(--dark); }
-.btn-dark { background: var(--dark); color: var(--beige); }
-.btn-dark:hover { background: var(--red); }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      background: var(--beige);
+      border-bottom: 4px solid var(--dark);
+    }
 
-/* ── SAUCEN ── */
-#saucen {
-  padding: 100px 0;
-  border-bottom: 4px solid var(--dark);
-}
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; font-weight: 900; letter-spacing: 0.2em;
-  text-transform: uppercase; margin-bottom: 24px;
-}
-.eyebrow-bar { width: 24px; height: 4px; background: var(--red); }
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      max-width: 220px;
+    }
 
-h2 {
-  font-size: clamp(2.5rem, 5vw, 6rem); font-weight: 900;
-  text-transform: uppercase; line-height: 0.88; letter-spacing: -0.02em;
-  margin-bottom: 64px;
-}
+    .nav-logo .ø {
+      color: var(--red);
+    }
 
-.saucen-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 4px solid var(--dark); box-shadow: var(--shadow-xl); }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      padding: 10px 20px;
+      border: 4px solid var(--dark);
+      box-shadow: var(--shadow);
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
+      cursor: pointer;
+    }
 
-.sauce-card {
-  padding: 48px 36px 56px;
-  position: relative; overflow: hidden;
-  cursor: pointer; border-right: 4px solid var(--dark);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.sauce-card:last-child { border-right: none; }
-.sauce-card:hover { transform: translate(-4px, -4px); box-shadow: var(--shadow-xl); z-index: 2; }
-.sauce-card.rot   { background: #FFF5F5; }
-.sauce-card.gruen { background: #F0FFF5; }
-.sauce-card.weiss { background: var(--beige); }
+    .nav-back:hover {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+      background: var(--dark);
+      color: var(--beige);
+    }
 
-.sauce-accent-bar {
-  position: absolute; top: 0; left: 0;
-  width: 100%; height: 8px;
-}
-.sauce-card.rot   .sauce-accent-bar { background: var(--red); }
-.sauce-card.gruen .sauce-accent-bar { background: var(--green); }
-.sauce-card.weiss .sauce-accent-bar { background: #AAAAAA; }
+    .nav-back svg {
+      width: 16px;
+      height: 16px;
+    }
 
-.sauce-num {
-  font-size: 100px; font-weight: 900; line-height: 1;
-  color: var(--dark); opacity: 0.05;
-  position: absolute; top: 16px; right: 16px;
-  letter-spacing: -0.04em;
-}
-.bottle-ph { width: 80px; height: 160px; margin: 0 auto 32px; }
-.bottle-ph svg { width: 80px; height: 160px; }
+    main {
+      padding-top: 68px;
+    }
 
-.sauce-name { font-size: 36px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 12px; }
-.sauce-heat { display: flex; gap: 5px; margin-bottom: 16px; }
-.heat-dot { width: 10px; height: 10px; border: 2px solid var(--red); }
-.heat-dot.on { background: var(--red); }
-.sauce-desc { font-size: 14px; font-weight: 500; line-height: 1.7; color: #555; }
+    .section-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
 
-.sauce-footer {
-  margin-top: 24px; background: var(--dark); color: var(--beige);
-  border: 4px solid var(--dark); padding: 12px 20px;
-  display: flex; justify-content: space-between; align-items: center;
-  margin: 24px -36px -56px; margin-left: -36px;
-}
-.sauce-price { font-size: 22px; font-weight: 900; }
-.sauce-add {
-  font-size: 11px; font-weight: 900; letter-spacing: 0.15em;
-  text-transform: uppercase; background: var(--red); color: var(--beige);
-  border: 2px solid var(--dark); padding: 8px 16px; cursor: pointer;
-  transition: background 0.15s;
-}
-.sauce-add:hover { background: var(--green); }
+    /* ── HERO ── */
+    #hero {
+      background: var(--beige);
+      border-bottom: 4px solid var(--dark);
+      padding: 80px 48px 80px;
+      background-image: radial-gradient(circle, var(--dark) 2px, transparent 3px);
+      background-size: 32px 32px;
+    }
 
-.saucen-cta { text-align: center; margin-top: 64px; }
+    .hero-box {
+      background: var(--beige);
+      border: 4px solid var(--dark);
+      box-shadow: var(--shadow-xl);
+      padding: 48px 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      max-width: 900px;
+    }
 
-/* ── JUNGLE-T ── */
-#jungle-t {
-  background: var(--red);
-  padding: 100px 0;
-  border-bottom: 4px solid var(--dark);
-}
-#jungle-t h2 { color: var(--beige); text-shadow: 6px 6px 0 var(--dark); margin-bottom: 48px; }
-.shirt-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-.shirt-text { }
-.shirt-eyebrow {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--dark); color: var(--beige);
-  border: 4px solid var(--dark); box-shadow: var(--shadow);
-  padding: 8px 20px; font-size: 11px; font-weight: 900;
-  letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 32px;
-}
-.shirt-text p {
-  color: rgba(255,255,229,0.8); font-size: 17px;
-  font-weight: 600; line-height: 1.75; margin-bottom: 20px;
-  max-width: 480px;
-}
-.shirt-price-block {
-  background: var(--beige); border: 4px solid var(--dark);
-  box-shadow: var(--shadow-lg); padding: 20px 28px;
-  display: inline-block; margin: 24px 0 32px;
-}
-.shirt-price { font-size: 64px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; }
-.shirt-price span { font-size: 20px; vertical-align: super; font-weight: 700; }
-.shirt-note { font-size: 11px; font-weight: 900; letter-spacing: 0.18em; text-transform: uppercase; color: #666; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--dark);
+      color: var(--beige);
+      border: 4px solid var(--dark);
+      padding: 8px 20px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      width: fit-content;
+    }
 
-.waitlist-form { display: flex; max-width: 440px; margin-top: 32px; }
-.waitlist-form input {
-  flex: 1; padding: 16px 20px;
-  border: 4px solid var(--dark); border-right: none;
-  background: var(--beige); color: var(--dark);
-  font-family: var(--font); font-size: 14px; font-weight: 600; outline: none;
-}
-.waitlist-form input::placeholder { color: #999; }
-.waitlist-form button {
-  padding: 16px 24px; background: var(--dark); border: 4px solid var(--dark);
-  color: var(--beige); font-family: var(--font); font-size: 12px;
-  font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase;
-  cursor: pointer; transition: background 0.15s; white-space: nowrap;
-}
-.waitlist-form button:hover { background: var(--green); color: var(--dark); border-color: var(--dark); }
+    h1 {
+      font-family: 'Berlin Sans FB Bold', var(--font);
+      font-size: clamp(3rem, 8vw, 8rem);
+      font-weight: 700;
+      line-height: 0.88;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
 
-.shirt-visual { display: flex; align-items: center; justify-content: center; }
-.shirt-box {
-  background: var(--dark); border: 6px solid var(--dark);
-  box-shadow: 16px 16px 0 rgba(0,0,0,0.3);
-  aspect-ratio: 3/4; width: 100%; max-width: 380px;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-.shirt-box::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: repeating-linear-gradient(45deg, rgba(255,255,229,0.04) 0, rgba(255,255,229,0.04) 2px, transparent 2px, transparent 12px);
-}
-.shirt-ph {
-  background: rgba(255,255,229,0.08); border: 4px solid rgba(255,255,229,0.2);
-  padding: 40px 32px; text-align: center;
-  font-size: 12px; font-weight: 700; color: rgba(255,255,229,0.35);
-  letter-spacing: 0.1em; text-transform: uppercase; line-height: 2;
-  position: relative; z-index: 1;
-}
-.shirt-price-badge {
-  position: absolute; bottom: -12px; right: -12px; z-index: 10;
-  background: var(--beige); border: 4px solid var(--dark);
-  box-shadow: var(--shadow-lg); padding: 16px 24px;
-}
-.badge-drop { font-size: 11px; font-weight: 900; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 4px; }
-.badge-name { font-size: 20px; font-weight: 900; text-transform: uppercase; }
-.badge-price { font-size: 32px; font-weight: 900; background: var(--green); border: 3px solid var(--dark); display: inline-block; padding: 2px 12px; margin-top: 8px; }
+    h1 .line-red {
+      color: var(--red);
+      text-decoration: underline;
+      text-decoration-thickness: 6px;
+      text-underline-offset: 8px;
+    }
 
-/* ── FOOTER ── */
-footer { background: var(--dark); border-top: 4px solid var(--dark); padding: 72px 0 32px; }
-.footer-inner { max-width: 1300px; margin: 0 auto; padding: 0 48px; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 64px; }
-.footer-brand { font-size: 36px; font-weight: 900; text-transform: uppercase; color: var(--beige); margin-bottom: 12px; letter-spacing: -0.02em; }
-.footer-brand .ø { color: var(--red); }
-.footer-tagline { font-size: 13px; color: rgba(255,255,229,0.4); line-height: 1.7; font-weight: 500; max-width: 220px; }
-.footer-col h4 { font-size: 10px; font-weight: 900; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,229,0.35); margin-bottom: 16px; border-bottom: 2px solid rgba(255,255,229,0.1); padding-bottom: 10px; }
-.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.footer-col ul li a { font-size: 14px; font-weight: 600; color: rgba(255,255,229,0.6); text-decoration: none; transition: color 0.15s; }
-.footer-col ul li a:hover { color: var(--beige); }
-.footer-bottom { border-top: 2px solid rgba(255,255,229,0.08); padding-top: 24px; display: flex; justify-content: space-between; }
-.footer-copy { font-size: 12px; color: rgba(255,255,229,0.3); font-weight: 500; }
+    .hero-sub {
+      background: var(--dark);
+      color: var(--beige);
+      border: 4px solid var(--dark);
+      padding: 16px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.5;
+      max-width: 560px;
+    }
 
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 36px;
+      border: 4px solid var(--dark);
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
+      width: fit-content;
+    }
 
-@media (max-width: 900px) {
-  nav { padding: 0 24px; }
-  #hero { padding: 60px 24px; }
-  .hero-box { padding: 32px 24px; }
-  .section-inner { padding: 0 24px; }
-  .saucen-grid { grid-template-columns: 1fr; border: none; box-shadow: none; gap: 16px; }
-  .sauce-card { border-right: none; border: 4px solid var(--dark); box-shadow: var(--shadow-lg); }
-  .shirt-layout { grid-template-columns: 1fr; gap: 48px; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-}
-@media (max-width: 600px) {
-  .footer-grid { grid-template-columns: 1fr; }
-  h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .reveal { transition: none; }
-}
-</style>
+    .btn:hover {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+
+    .btn-red {
+      background: var(--red);
+      color: var(--beige);
+    }
+
+    .btn-red:hover {
+      background: var(--dark);
+    }
+
+    .btn-dark {
+      background: var(--dark);
+      color: var(--beige);
+    }
+
+    .btn-dark:hover {
+      background: var(--red);
+    }
+
+    /* ── SAUCEN ── */
+    #saucen {
+      padding: 100px 0;
+      border-bottom: 4px solid var(--dark);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .eyebrow-bar {
+      width: 24px;
+      height: 4px;
+      background: var(--red);
+    }
+
+    h2 {
+      font-family: 'Berlin Sans FB Bold', var(--font);
+      font-size: clamp(2.5rem, 5vw, 6rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.88;
+      letter-spacing: -0.02em;
+      margin-bottom: 64px;
+    }
+
+    .saucen-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 4px solid var(--dark);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .sauce-card {
+      padding: 48px 36px 56px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      border-right: 4px solid var(--dark);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .sauce-card:last-child {
+      border-right: none;
+    }
+
+    .sauce-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 8px 16px 0 var(--dark);
+      z-index: 2;
+    }
+
+    .sauce-card.rot {
+      background: #fccdbe;
+    }
+
+    .sauce-card.gelb {
+      background: #fff3a4;
+    }
+
+    .sauce-card.weiss {
+      background: #fffce9;
+    }
+
+    .sauce-accent-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+    }
+
+    .sauce-card.rot .sauce-accent-bar {
+      background: var(--red);
+    }
+
+    .sauce-card.gelb .sauce-accent-bar {
+      background: #E8C000;
+    }
+
+    .sauce-card.weiss .sauce-accent-bar {
+      background: #AAAAAA;
+    }
+
+    .sauce-num {
+      font-size: 100px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--dark);
+      opacity: 0.05;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      letter-spacing: -0.04em;
+    }
+
+    .bottle-ph {
+      width: 120px;
+      height: 200px;
+      margin: 0 auto 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bottle-ph img {
+      width: 120px;
+      height: 200px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .sauce-name {
+      font-size: 36px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+
+    .sauce-heat {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .heat-chili {
+      width: 22px;
+      height: 22px;
+      opacity: 0.15;
+    }
+
+    .heat-chili.on {
+      opacity: 1;
+    }
+
+    .sauce-desc {
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .sauce-footer {
+      margin-top: 24px;
+      background: var(--dark);
+      color: var(--beige);
+      border: 4px solid var(--dark);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 24px -36px -56px;
+      margin-left: -36px;
+    }
+
+    .sauce-price {
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .sauce-add {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: var(--beige);
+      color: var(--dark);
+      border: 2px solid var(--dark);
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .sauce-add:hover {
+      background: var(--dark);
+      color: var(--beige);
+    }
+
+    .saucen-cta {
+      text-align: center;
+      margin-top: 64px;
+    }
+
+    /* ── JUNGLE-T ── */
+    #jungle-t {
+      background: var(--red);
+      padding: 100px 0;
+      border-bottom: 4px solid var(--dark);
+    }
+
+    #jungle-t h2 {
+      color: var(--beige);
+      text-shadow: 6px 6px 0 var(--dark);
+      margin-bottom: 48px;
+    }
+
+    .shirt-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .shirt-text {}
+
+    .shirt-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--dark);
+      color: var(--beige);
+      border: 4px solid var(--dark);
+      box-shadow: var(--shadow);
+      padding: 8px 20px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .shirt-text p {
+      color: rgba(255, 255, 229, 0.8);
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.75;
+      margin-bottom: 20px;
+      max-width: 480px;
+    }
+
+    .shirt-price-block {
+      background: var(--beige);
+      border: 4px solid var(--dark);
+      box-shadow: var(--shadow-lg);
+      padding: 20px 28px;
+      display: inline-block;
+      margin: 24px 0 32px;
+    }
+
+    .shirt-price {
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .shirt-price span {
+      font-size: 20px;
+      vertical-align: super;
+      font-weight: 700;
+    }
+
+    .shirt-note {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    .waitlist-form {
+      display: flex;
+      max-width: 440px;
+      margin-top: 32px;
+    }
+
+    .waitlist-form input {
+      flex: 1;
+      padding: 16px 20px;
+      border: 4px solid var(--dark);
+      border-right: none;
+      background: var(--beige);
+      color: var(--dark);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      outline: none;
+    }
+
+    .waitlist-form input::placeholder {
+      color: #999;
+    }
+
+    .waitlist-form button {
+      padding: 16px 24px;
+      background: var(--dark);
+      border: 4px solid var(--dark);
+      color: var(--beige);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+
+    .waitlist-form button:hover {
+      background: var(--green);
+      color: var(--dark);
+      border-color: var(--dark);
+    }
+
+    .shirt-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shirt-box {
+      background: var(--dark);
+      border: 6px solid var(--dark);
+      box-shadow: 16px 16px 0 rgba(0, 0, 0, 0.3);
+      aspect-ratio: 3/4;
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shirt-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, rgba(255, 255, 229, 0.04) 0, rgba(255, 255, 229, 0.04) 2px, transparent 2px, transparent 12px);
+    }
+
+    .shirt-ph {
+      background: rgba(255, 255, 229, 0.08);
+      border: 4px solid rgba(255, 255, 229, 0.2);
+      padding: 40px 32px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255, 255, 229, 0.35);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 2;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shirt-price-badge {
+      position: absolute;
+      bottom: -12px;
+      right: -12px;
+      z-index: 10;
+      background: var(--beige);
+      border: 4px solid var(--dark);
+      box-shadow: var(--shadow-lg);
+      padding: 16px 24px;
+    }
+
+    .badge-drop {
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+
+    .badge-name {
+      font-size: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .badge-price {
+      font-size: 32px;
+      font-weight: 900;
+      background: var(--green);
+      border: 3px solid var(--dark);
+      display: inline-block;
+      padding: 2px 12px;
+      margin-top: 8px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 4px solid var(--dark);
+      padding: 72px 0 32px;
+    }
+
+    .footer-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+
+    .footer-brand {
+      font-size: 36px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--beige);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .footer-brand .ø {
+      color: var(--red);
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255, 255, 229, 0.4);
+      line-height: 1.7;
+      font-weight: 500;
+      max-width: 220px;
+    }
+
+    .footer-col h4 {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 229, 0.35);
+      margin-bottom: 16px;
+      border-bottom: 2px solid rgba(255, 255, 229, 0.1);
+      padding-bottom: 10px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255, 255, 229, 0.6);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--beige);
+    }
+
+    .footer-bottom {
+      border-top: 2px solid rgba(255, 255, 229, 0.08);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255, 255, 229, 0.3);
+      font-weight: 500;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        padding: 0 24px;
+      }
+
+      #hero {
+        padding: 60px 24px;
+      }
+
+      .hero-box {
+        padding: 32px 24px;
+      }
+
+      .section-inner {
+        padding: 0 24px;
+      }
+
+      .saucen-grid {
+        grid-template-columns: 1fr;
+        border: none;
+        box-shadow: none;
+        gap: 16px;
+      }
+
+      .sauce-card {
+        border-right: none;
+        border: 4px solid var(--dark);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .shirt-layout {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        transition: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<nav>
-  <a href="/" class="nav-logo">
-    <img src="uploads/jungle-dog-logo.svg" alt="Jungle Dog Logo">
-    JUNGLE D<span class="ø">Ø</span>G
-  </a>
-  <a href="/map" class="nav-back">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    Zurück
-  </a>
-</nav>
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="Bilder/Logo/jungle-dog-logo-mit-schrift.svg" alt="Jungle Dog Logo">
+    </a>
+    <a href="/map" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+      Zurück
+    </a>
+  </nav>
 
-<main>
+  <main>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="section-inner">
-      <div class="hero-box">
-        <div class="hero-tag">Das Sortiment</div>
-        <h1>Drei Saucen.<br>Unendlich<br><span class="line-red">Geschmack.</span></h1>
-        <div class="hero-sub">100% Urban Grown. 0% Bullshit. Small batches für maximalen Impact.</div>
-        <a href="#saucen" class="btn btn-red">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2.5"/><path d="M16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
-          Auswahl treffen
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- SAUCEN -->
-  <section id="saucen">
-    <div class="section-inner">
-      <div class="eyebrow"><span class="eyebrow-bar"></span> Produkte</div>
-      <h2>Auswahl<br>Treffen.</h2>
-      <div class="saucen-grid">
-
-        <div class="sauce-card rot reveal" style="transition-delay:0.05s">
-          <div class="sauce-accent-bar"></div>
-          <span class="sauce-num">1</span>
-          <div class="bottle-ph">
-            <svg viewBox="0 0 80 160" fill="none">
-              <rect x="30" y="0" width="20" height="12" rx="2" fill="#111111"/>
-              <path d="M28 12 Q24 20 22 32 L22 140 Q22 148 40 148 Q58 148 58 140 L58 32 Q56 20 52 12 Z" fill="#ED3221" stroke="#111111" stroke-width="2"/>
-              <rect x="24" y="55" width="32" height="50" rx="0" fill="rgba(255,255,229,0.18)"/>
-              <line x1="28" y1="68" x2="52" y2="68" stroke="rgba(255,255,229,0.6)" stroke-width="1.2"/>
-              <line x1="28" y1="76" x2="52" y2="76" stroke="rgba(255,255,229,0.35)" stroke-width="1"/>
-              <line x1="28" y1="84" x2="44" y2="84" stroke="rgba(255,255,229,0.35)" stroke-width="1"/>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="section-inner">
+        <div class="hero-box">
+          <div class="hero-tag">Das Sortiment</div>
+          <h1>Drei Saucen.<br>Unendlich<br><span class="line-red">Geschmack.</span></h1>
+          <div class="hero-sub">100% Urban Grown. 0% Bullshit. Small batches für maximalen Impact.</div>
+          <a href="#saucen" class="btn btn-red">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 2L3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6L18 2H6Z" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" />
+              <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2.5" />
+              <path d="M16 10C16 12.2 14.2 14 12 14C9.8 14 8 12.2 8 10" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" />
             </svg>
-          </div>
-          <div class="sauce-name">Jungle Red</div>
-          <div class="sauce-heat">
-            <div class="heat-dot on"></div><div class="heat-dot on"></div>
-            <div class="heat-dot on"></div><div class="heat-dot on"></div><div class="heat-dot"></div>
-          </div>
-          <p class="sauce-desc">Die Klassikerin. Fruchtig-scharfe Chilisauce mit Charakter — für alle, die wissen, was sie wollen.</p>
-          <div class="sauce-footer">
-            <span class="sauce-price">CHF 12.—</span>
-            <button class="sauce-add">In den Warenkorb</button>
-          </div>
+            Auswahl treffen
+          </a>
         </div>
-
-        <div class="sauce-card gruen reveal" style="transition-delay:0.15s">
-          <div class="sauce-accent-bar"></div>
-          <span class="sauce-num">2</span>
-          <div class="bottle-ph">
-            <svg viewBox="0 0 80 160" fill="none">
-              <rect x="30" y="0" width="20" height="12" rx="2" fill="#111111"/>
-              <path d="M28 12 Q24 20 22 32 L22 140 Q22 148 40 148 Q58 148 58 140 L58 32 Q56 20 52 12 Z" fill="#1AAA5A" stroke="#111111" stroke-width="2"/>
-              <rect x="24" y="55" width="32" height="50" rx="0" fill="rgba(255,255,229,0.18)"/>
-              <line x1="28" y1="68" x2="52" y2="68" stroke="rgba(255,255,229,0.6)" stroke-width="1.2"/>
-              <line x1="28" y1="76" x2="52" y2="76" stroke="rgba(255,255,229,0.35)" stroke-width="1"/>
-              <line x1="28" y1="84" x2="44" y2="84" stroke="rgba(255,255,229,0.35)" stroke-width="1"/>
-            </svg>
-          </div>
-          <div class="sauce-name">Jungle Green</div>
-          <div class="sauce-heat">
-            <div class="heat-dot on"></div><div class="heat-dot on"></div>
-            <div class="heat-dot on"></div><div class="heat-dot"></div><div class="heat-dot"></div>
-          </div>
-          <p class="sauce-desc">Grüne Chilis, frische Kräuter, ein Hauch Zitrus. Die frische Alternative — leicht scharf, voll im Geschmack.</p>
-          <div class="sauce-footer">
-            <span class="sauce-price">CHF 12.—</span>
-            <button class="sauce-add">In den Warenkorb</button>
-          </div>
-        </div>
-
-        <div class="sauce-card weiss reveal" style="transition-delay:0.25s">
-          <div class="sauce-accent-bar"></div>
-          <span class="sauce-num">3</span>
-          <div class="bottle-ph">
-            <svg viewBox="0 0 80 160" fill="none">
-              <rect x="30" y="0" width="20" height="12" rx="2" fill="#111111"/>
-              <path d="M28 12 Q24 20 22 32 L22 140 Q22 148 40 148 Q58 148 58 140 L58 32 Q56 20 52 12 Z" fill="#EDEDDE" stroke="#111111" stroke-width="2"/>
-              <rect x="24" y="55" width="32" height="50" rx="0" fill="rgba(17,17,17,0.07)"/>
-              <line x1="28" y1="68" x2="52" y2="68" stroke="rgba(17,17,17,0.3)" stroke-width="1.2"/>
-              <line x1="28" y1="76" x2="52" y2="76" stroke="rgba(17,17,17,0.18)" stroke-width="1"/>
-              <line x1="28" y1="84" x2="44" y2="84" stroke="rgba(17,17,17,0.18)" stroke-width="1"/>
-            </svg>
-          </div>
-          <div class="sauce-name">Jungle White</div>
-          <div class="sauce-heat">
-            <div class="heat-dot on"></div><div class="heat-dot on"></div>
-            <div class="heat-dot"></div><div class="heat-dot"></div><div class="heat-dot"></div>
-          </div>
-          <p class="sauce-desc">Neu. Mild und cremig mit einer feinen Chili-Note. Die überraschende Ergänzung für alles, was cremig-feurig sein darf.</p>
-          <div class="sauce-footer">
-            <span class="sauce-price">CHF 12.—</span>
-            <button class="sauce-add">In den Warenkorb</button>
-          </div>
-        </div>
-
       </div>
-      <div class="saucen-cta reveal">
-        <a href="#" class="btn btn-dark">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2.5"/></svg>
-          Jetzt bestellen
-        </a>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- JUNGLE-T -->
-  <section id="jungle-t">
-    <div class="section-inner">
-      <div class="shirt-layout">
-        <div class="shirt-text reveal">
-          <div class="shirt-eyebrow">Merch Release — Drop #01</div>
-          <h2>Wear the<br>Revolution.</h2>
-          <p>Kein Werbematerial. Kein Logo-Shirt für Pfennige. Das Jungle-T ist ein Statement — hochwertig produziert, mit gesticktem Markenzeichen, limitiert.</p>
-          <p>Wer es trägt, weiss warum.</p>
-          <div class="shirt-price-block">
-            <div class="shirt-price"><span>CHF </span>89</div>
-            <div class="shirt-note">Premium — Limitierte Auflage — Strick-Logo</div>
+    <!-- SAUCEN -->
+    <section id="saucen">
+      <div class="section-inner">
+        <div class="eyebrow"><span class="eyebrow-bar"></span> Produkte</div>
+        <h2>Auswahl<br>Treffen.</h2>
+        <div class="saucen-grid">
+
+          <div class="sauce-card rot reveal" style="transition-delay:0.05s">
+            <div class="sauce-accent-bar"></div>
+            <span class="sauce-num">1</span>
+            <div class="bottle-ph">
+              <img src="Bilder/Produkte/Jungle Red.svg" alt="Jungle Red Chilisauce">
+            </div>
+            <div class="sauce-name">Jungle Red</div>
+            <div class="sauce-heat">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili" src="Bilder/chili-icon.svg" alt="chili">
+            </div>
+            <p class="sauce-desc">Die Klassikerin. Fruchtig-scharfe Chilisauce mit Charakter — für alle, die wissen, was
+              sie wollen.</p>
+            <div class="sauce-footer">
+              <span class="sauce-price">CHF 12.—</span>
+              <button class="sauce-add">In den Warenkorb</button>
+            </div>
           </div>
-          <div class="waitlist-form">
-            <input type="email" placeholder="Deine E-Mail-Adresse" aria-label="E-Mail für Warteliste">
-            <button type="submit">Warteliste</button>
+
+          <div class="sauce-card gelb reveal" style="transition-delay:0.15s">
+            <div class="sauce-accent-bar"></div>
+            <span class="sauce-num">2</span>
+            <div class="bottle-ph">
+              <img src="Bilder/Produkte/Jungle Yellow.svg" alt="Jungle Yellow Chilisauce">
+            </div>
+            <div class="sauce-name">Jungle Yellow</div>
+            <div class="sauce-heat">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+            </div>
+            <p class="sauce-desc">Gelbe Chilis, ein Hauch Mango, feine Süsse. Die sonnige Alternative — mild scharf, mit
+              tropischem Charakter.</p>
+            <div class="sauce-footer">
+              <span class="sauce-price">CHF 12.—</span>
+              <button class="sauce-add">In den Warenkorb</button>
+            </div>
           </div>
+
+          <div class="sauce-card weiss reveal" style="transition-delay:0.25s">
+            <div class="sauce-accent-bar"></div>
+            <span class="sauce-num">3</span>
+            <div class="bottle-ph">
+              <img src="Bilder/Produkte/Jungle White.svg" alt="Jungle White Chilisauce">
+            </div>
+            <div class="sauce-name">Jungle White</div>
+            <div class="sauce-heat">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili on" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili" src="Bilder/chili-icon.svg" alt="chili">
+              <img class="heat-chili" src="Bilder/chili-icon.svg" alt="chili">
+            </div>
+            <p class="sauce-desc">Neu. Mild und cremig mit einer feinen Chili-Note. Die überraschende Ergänzung für
+              alles, was cremig-feurig sein darf.</p>
+            <div class="sauce-footer">
+              <span class="sauce-price">CHF 12.—</span>
+              <button class="sauce-add">In den Warenkorb</button>
+            </div>
+          </div>
+
         </div>
-        <div class="shirt-visual reveal">
-          <div class="shirt-box">
-            <div class="shirt-ph">T-Shirt-Foto<br>Jungle-T<br>mit Strick-Logo<br>——<br>Vorderseite</div>
-            <div class="shirt-price-badge">
-              <div class="badge-drop">Drop #01</div>
-              <div class="badge-name">The Jungle-T</div>
-              <div class="badge-price">45.—</div>
+        <div class="saucen-cta reveal">
+          <a href="#" class="btn btn-dark">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M6 2L3 6V20C3 21.1 3.9 22 5 22H19C20.1 22 21 21.1 21 20V6L18 2H6Z" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" />
+              <line x1="3" y1="6" x2="21" y2="6" stroke="currentColor" stroke-width="2.5" />
+            </svg>
+            Jetzt bestellen
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- JUNGLE-T -->
+    <section id="jungle-t">
+      <div class="section-inner">
+        <div class="shirt-layout">
+          <div class="shirt-text reveal">
+            <div class="shirt-eyebrow">Merch Release — Drop #01</div>
+            <h2>Wear the<br>Revolution.</h2>
+            <p>Kein Werbematerial. Kein Logo-Shirt für Pfennige. Das Jungle-T ist ein Statement — hochwertig produziert,
+              mit gesticktem Markenzeichen, limitiert.</p>
+            <p>Wer es trägt, weiss warum.</p>
+            <div class="shirt-price-block">
+              <div class="shirt-price"><span>CHF </span>89</div>
+              <div class="shirt-note">Premium — Limitierte Auflage — Strick-Logo</div>
+            </div>
+            <div class="waitlist-form">
+              <input type="email" placeholder="Deine E-Mail-Adresse" aria-label="E-Mail für Warteliste">
+              <button type="submit">Warteliste</button>
+            </div>
+          </div>
+          <div class="shirt-visual reveal">
+            <div class="shirt-box">
+              <img src="Bilder/Produkte/jungle-t.png" alt="Jungle-T Shirt"
+                style="width:100%;height:100%;object-fit:cover;position:relative;z-index:1;">
+              <div class="shirt-price-badge">
+                <div class="badge-drop">Drop #01</div>
+                <div class="badge-name">The Jungle-T</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">JUNGLE D<span class="ø">Ø</span>G</div>
+          <p class="footer-tagline">Handgemachte Chilisaucen aus Bern. Vom Stadtdach in die Flasche.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Produkte</h4>
+          <ul>
+            <li><a href="#">Jungle Red</a></li>
+            <li><a href="#">Jungle Yellow</a></li>
+            <li><a href="#">Jungle White</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Entdecken</h4>
+          <ul>
+            <li><a href="anbau.html">Anbau</a></li>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="partner.html">Partner</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="mailto:info@jungledog.ch">info@jungledog.ch</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Impressum</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 Jungle Døg, Bern.</span>
+        <span class="footer-copy">Handgemacht mit Schärfe.</span>
+      </div>
     </div>
-  </section>
+  </footer>
 
-</main>
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-<footer>
-  <div class="footer-inner">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">JUNGLE D<span class="ø">Ø</span>G</div>
-        <p class="footer-tagline">Handgemachte Chilisaucen aus Bern. Vom Stadtdach in die Flasche.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Produkte</h4>
-        <ul><li><a href="#">Jungle Red</a></li><li><a href="#">Jungle Green</a></li><li><a href="#">Jungle White</a></li></ul>
-      </div>
-      <div class="footer-col">
-        <h4>Entdecken</h4>
-        <ul><li><a href="anbau.html">Anbau</a></li><li><a href="about.html">Über uns</a></li><li><a href="partner.html">Partner</a></li></ul>
-      </div>
-      <div class="footer-col">
-        <h4>Kontakt</h4>
-        <ul><li><a href="mailto:info@jungledog.ch">info@jungledog.ch</a></li><li><a href="#">Instagram</a></li><li><a href="#">Impressum</a></li></ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Jungle Døg, Bern.</span>
-      <span class="footer-copy">Handgemacht mit Schärfe.</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-document.querySelector('.waitlist-form button').addEventListener('click', () => {
-  const inp = document.querySelector('.waitlist-form input');
-  if (inp.value.includes('@')) {
-    inp.value = ''; inp.placeholder = 'Danke! Du bist auf der Liste.';
-    inp.style.borderColor = '#1AAA5A';
-  }
-});
-</script>
+    document.querySelector('.waitlist-form button').addEventListener('click', () => {
+      const inp = document.querySelector('.waitlist-form input');
+      if (inp.value.includes('@')) {
+        inp.value = ''; inp.placeholder = 'Danke! Du bist auf der Liste.';
+        inp.style.borderColor = '#1AAA5A';
+      }
+    });
+  </script>
 </body>
+
 </html>
